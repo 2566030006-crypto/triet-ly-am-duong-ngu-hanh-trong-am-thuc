@@ -1,0 +1,13 @@
+ĐẶT TẤT CẢ FILE ẢNH VÀO THƯ MỤC NÀY
+======================================
+
+Ví dụ:
+  benh_vien.jpg
+  xe_cap_cuu.jpg
+  hien_truong.jpg
+
+Lưu ý:
+  - Tên file không có dấu cách (dùng dấu _ thay thế)
+  - Định dạng hỗ trợ: .jpg  .jpeg  .png  .webp
+  - Tên file trong thư mục phải KHỚP CHÍNH XÁC với tên trong story.html
+    (phân biệt chữ HOA và chữ thường)
