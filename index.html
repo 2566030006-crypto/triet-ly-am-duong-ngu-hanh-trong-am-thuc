@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- ================================================
          ĐỔI TIÊU ĐỀ TRANG (hiện trên tab trình duyệt)
          ================================================ -->
@@ -11,17 +12,18 @@
 
     <style>
       /* Reset cơ bản */
-      * {
+      *{
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        text-align: justify;
       }
 
       body {
         font-family: 'Georgia', serif; /* Kiểu chữ */
         background: #000;
       }
-
+      
       /* -----------------------------------------------
            ẢNH NỀN CỐ ĐỊNH - tự động thay đổi khi cuộn
            (không cần chỉnh phần này)
@@ -32,12 +34,12 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        transition: opacity 0.8s ease; /* hiệu ứng mờ dần khi đổi ảnh */
+        transition: transform 1.2s ease, opacity 0.9s ease; /* hiệu ứng mờ dần khi đổi ảnh */
         z-index: 0;
       }
 
       /* Lớp tối phủ lên ảnh nền (giúp chữ dễ đọc hơn) */
-      #background::before {
+      #background::after {
         content: '';
         position:
         inset: 0;
@@ -65,7 +67,7 @@
            HỘP CHỮ Ở GIỮA MÀN HÌNH
            ----------------------------------------------- */
       .text-box {
-        max-width: 680px; /* chiều rộng tối đa của hộp chữ */
+        max-width: 800px; /* chiều rộng tối đa của hộp chữ */
         background: rgba(
           30,
           30,
@@ -74,7 +76,7 @@
         ); /* màu nền hộp (số cuối = độ trong suốt) */
         color: #ffffff; /* màu chữ */
         padding: 36px 42px; /* khoảng trống bên trong hộp */
-        border-radius: 6px; /* góc bo tròn */
+        border-radius: 0px; /* góc bo tròn */
         line-height: 1.85; /* khoảng cách dòng */
         font-size: 1.15rem; /* cỡ chữ */
       }
@@ -83,18 +85,37 @@
       .text-box h2 {
         font-size: 1.4rem;
         margin-bottom: 14px;
-        color: #f0e6cc; /* màu tiêu đề */
+        color: #f1c380; /* màu tiêu đề */
       }
+
+    .text-box-1 {
+        max-width: 680px; /* chiều rộng tối đa của hộp chữ */
+        background: rgb(rgb(255, 255, 255)
+          30,
+          30,
+          30,
+          0.72
+        );
+        color: #000000; /* màu chữ */
+        padding: 36px 42px; /* khoảng trống bên trong hộp */
+        border-radius: 0px; /* góc bo tròn */
+        line-height: 1.85; /* khoảng cách dòng */
+        font-size: 1.15rem; /* cỡ chữ */
+      }
+
 
       /* Khoảng cách giữa các đoạn văn */
       .text-box p + p {
         margin-top: 14px;
       }
+     
     </style>
   </head>
   <body>
+
     <!-- Ảnh nền (tự động cập nhật bằng JavaScript) -->
-    <div id="background"></div>
+    <div id="background"> </div>
+
 
     <div id="content">
       <!-- ================================================================
@@ -146,28 +167,24 @@
          ĐOẠN 2 — vẫn dùng ảnh: hiện_trường.jpg
          (cùng ảnh nền, nội dung khác)
          ════════════════════════════════════════════ -->
-         <section data-bg="sxbtt.jpg">
-        <div class="text-box">
-          <p>
+         <section data-bg="sxbtt.png">
+       <div class="text-box-1">
+        <p>
             GS. Trần Ngọc Thêm đã đưa ra những bằng chứng ngôn ngữ học thuyết phục khi cho rằng hai từ “âm dương” vốn bắt nguồn từ cặp khái niệm “mẹ” và “trời” (ina - yang) trong 
             các ngôn ngữ Đông Nam Á cổ, tạo nên một hệ giá trị khác biệt hoàn toàn với tư duy phương Bắc. Điểm mấu chốt nằm ở 
             trật tự "âm trước dương sau" - một đặc trưng phản ánh đậm nét truyền thống trọng nữ của người dân lúa nước, khác biệt 
             với trật tự "dương trước âm sau" (như Thiên - Địa, Phụ - Mẫu) của truyền thống trọng nam trong văn hóa Trung Hoa.
-          </p>
-        </div>
-      </section>
-      <section data-bg="image_0.jpg">
-        <div class="text-box">
-          <h2>Điều này cho thấy cặp khái niệm âm dương được hình thành trên cơ sở tổng hợp hai cặp phạm trù sinh tồn thiết yếu là
+          <h3> Điều này cho thấy cặp khái niệm âm dương được hình thành trên cơ sở tổng hợp hai cặp phạm trù sinh tồn thiết yếu là
           “mẹ - cha” và “đất - trời”, nơi người phụ nữ và đất đai được tôn vinh như những thực thể khởi đầu của sự sống</h2>
           <p>
-            ThS. Nguyễn Ngọc Thơ cũng củng cố thêm quan điểm này bằng cách liệt kê hàng loạt biểu hiện của tư tưởng âm dương ngũ hành
+            ThS. Nguyễn Ngọc Thơ củng cố thêm quan điểm này bằng cách liệt kê hàng loạt biểu hiện của tư tưởng âm dương ngũ hành
             trong mọi khía cạnh phong tục, từ tập quán ăn uống đến những truyền thuyết cổ xưa, minh chứng cho tính bản địa và sự lưỡng 
-            phân lưỡng hợp vốn có của văn hóa Việt. 
+            phân lưỡng hợp vốn có của văn hóa Việt.
 
           </p>
         </div>
       </section>
+     
      <section data-bg="image_1_3.jpg">
         <div class="text-box">
             <h2>Đối với người Việt Nam, triết lý âm dương - ngũ hành không phải là những định nghĩa trừu tượng mà là những trải nghiệm
@@ -183,36 +200,35 @@
           </p>
         </div>
       </section>
-      <section data-bg="image_3.jpg">
-        <div class="text-box">
-            <h2>Tiếp nối từ sự cân bằng của âm dương, thuyết ngũ hành chính là bước đi cụ thể hơn để giải thích cách thế giới này vận hành. 
-</h2>
-          <p>
-            Nếu âm dương là hai mặt đối lập như "Ngày và Đêm", thì Ngũ Hành là năm nhóm yếu tố gồm: Kim (Kim loại), Mộc (Cây cối), Thủy (Nước), Hỏa (Lửa) và Thổ (Đất).
-            
-            Người xưa quan sát thấy rằng mọi thứ trên đời không đứng yên mà luôn tác động lẫn nhau, nên họ đã dùng năm hình ảnh gần gũi này để 
+
+      <section data-bg="nen.png">
+        <div class="text-box-1">
+            <h2>Tiếp nối từ sự cân bằng của âm dương, thuyết ngũ hành chính là bước đi cụ thể hơn để giải thích cách thế giới này vận hành</h2> 
+          <p>Nếu âm dương là hai mặt đối lập như "Ngày và Đêm", thì Ngũ Hành là năm nhóm yếu tố gồm: Kim (Kim loại), Mộc (Cây cối), Thủy (Nước), Hỏa (Lửa) và Thổ (Đất).
+          <p></p> Người xưa quan sát thấy rằng mọi thứ trên đời không đứng yên mà luôn tác động lẫn nhau, nên họ đã dùng năm hình ảnh gần gũi này để 
             tượng trưng cho năm trạng thái năng lượng. Điểm thú vị nhất của Ngũ Hành chính là sự kết nối: chúng có thể hỗ trợ nhau cùng lớn mạnh 
             (gọi là Tương sinh, như nước nuôi cây phát triển) hoặc kiềm chế lẫn nhau để giữ thế cân bằng (gọi là Tương khắc, như nước có thể dập 
-            tắt lửa). Chính sự luân chuyển không ngừng giữa năm yếu tố này đã tạo nên một dòng chảy cuộc sống hài hòa, nơi mọi sự vật đều có vị trí 
+            tắt lửa). 
+          <p></p>Chính sự luân chuyển không ngừng giữa năm yếu tố này đã tạo nên một dòng chảy cuộc sống hài hòa, nơi mọi sự vật đều có vị trí 
             và vai trò riêng để cùng nhau tồn tại.
+          <h3>Triết lý âm dương - ngũ hành trong văn hóa Việt Nam không chỉ là một hệ thống lý thuyết được vay mượn mà là một sản phẩm tự thân của 
+              tư duy nông nghiệp, mang tính nguyên thủy, tự phát và bền bỉ. 
  
-          </p>
-        </div>
-      </section>
-      <section data-bg="image_3.jpg">
-        <p style="text-align: justify; line-height:1.6; margin:0;"></p>
-        <div class="text-box">
-            <h2>Triết lý âm dương - ngũ hành trong văn hóa Việt Nam không chỉ là một hệ thống lý thuyết được vay mượn mà là một sản phẩm tự thân của 
-              tư duy nông nghiệp, mang tính nguyên thủy, tự phát và bền bỉ. Khi đi vào đời sống, triết lý này không chỉ dừng lại ở mức tư tưởng mà trở 
+          </h5> Khi đi vào đời sống, triết lý này không chỉ dừng lại ở mức tư tưởng mà trở 
               thành nguyên tắc, trong đó ẩm thực là một minh chứng rõ nét và gần gũi nhất - nơi các món ăn hằng ngày không chỉ đơn thuần là thực phẩm mà 
               còn là sự bài trí khoa học để đạt tới sự điều hòa giữa các tính chất hàn - nhiệt, giúp con người thích nghi với sự thay đổi của thời tiết và 
-              duy trì sức khỏe. 
- 
+              duy trì sức khỏe.
+
+        </div>
+      </section>
+
+      <section data-bg="menh.png">
+        <div>
           </p>
         </div>
       </section>
       <!-- ════════════════════════════════════════════
-         ĐOẠN 3 — ảnh nền: xe_cap_cuu.jpg
+         ĐOẠN 3
          ════════════════════════════════════════════ -->
       <section data-bg="background_1.jpg">
         <div class="text-box">
@@ -226,29 +242,34 @@
           </p>
         </div>
       </section>
-      <section data-bg="background_1.jpg">
-        <div class="text-box">
+
+      <section data-bg="nen.png">
+        <div class="text-box-1">
           <h2>Nghệ thuật ăn uống tinh tế của người Việt</h2>
           <p>
-            Trong ăn uống, người Việt đặc biệt chú trọng đến ba mặt quan hệ biện chứng âm dương hết sức mật thiết với nhau, đó là: bảo đảm hài hòa âm dương của thức
-            ăn; bảo đảm sự quân bình âm dương trong cơ thể và bảo đảm sự cân bằng âm dương giữa con người với môi trường tự nhiên
-          <p>
-            Thứ nhất, bảo đảm hài hòa âm dương của thức ăn. Trong ẩm thực, âm dương được phân thành năm mức độ tương ứng với ngũ hành: hàn (lạnh, âm nhiều, hành Thủy), 
-            nhiệt (nóng, dương nhiều, hành Hỏa), ôn (ấm, dương ít, hành Mộc), lương (mát, âm ít, hành Kim) và bình (trung tính, hành Thổ). 
+            Trong ăn uống, người Việt đặc biệt chú trọng đến ba mặt quan hệ biện chứng âm dương hết sức mật thiết với nhau, đó là bảo đảm hài hòa âm dương của thức
+            ăn; bảo đảm sự quân bình âm dương trong cơ thể và bảo đảm sự cân bằng âm dương giữa con người với môi trường tự nhiên.
+          </p>
+          <h3> Thứ nhất, bảo đảm hài hòa âm dương của thức ăn </h3>
+          <p></p> Trong ẩm thực, âm dương được phân thành năm mức độ tương ứng với ngũ hành: hàn (lạnh, âm nhiều, hành Thủy), 
+            nhiệt (nóng, dương nhiều, hành Hỏa), ôn (ấm, dương ít, hành Mộc), lương (mát, âm ít, hành Kim) và bình (trung tính, hành Thổ). Mỗi nguyên liệu đều mang một hoặc nhiều mức độ âm dương nhất định, và nghệ thuật nấu ăn của người Việt trước hết là nghệ thuật kết hợp: lấy cái nóng bù cho 
+            cái lạnh, lấy cái ấm nâng đỡ cái mát.
+          <p>Điều đó giải thích tại sao gừng - một gia vị có tính nhiệt (dương), có tác dụng thanh hàn, giải cảm - hầu như không bao giờ vắng mặt khi nấu kèm các loại 
+            thực phẩm như bí đao (hàn), thịt vịt (lương), hay các món ốc, hến, cua.</p>
+          <br>
+            <img 
+            src="images/gung.png" 
+          alt="Gừng là gia vị có tính nhiệt (dương)" được chế biến cùng thịt vịt (tính lương), bí đao (tính hàn)
+          style="display: block; width: 600px; height: auto; margin-top: 10px; border-radius: 20px;"
 
+          <figcaption style="font-size:16px; color:gray; margin-top:8px; text-align:center;">
+        Gừng là gia vị có tính dương nên thường được dùng chế biến cùng bí đao (tính hàn) và thịt vịt (tính lương)
+    </figcaption>
+</figure>
 
-        </div>
+          </div>
       </section>
 
-      <section data-bg="thitvitkhogung.png">
-        <div class="text-box">
-          <h2>Nghệ thuật ăn uống tinh tế của người Việt</h2>
-          <p>
-            Mỗi nguyên liệu đều mang một hoặc nhiều mức độ âm dương nhất định, và nghệ thuật nấu ăn của người Việt trước hết là nghệ thuật kết hợp: lấy cái nóng bù cho 
-            cái lạnh, lấy cái ấm nâng đỡ cái mát
-
-        </div>
-      </section>
       <section data-bg="themgung.png">
         <div class="text-box">
           <h2>Nghệ thuật ăn uống tinh tế của người Việt</h2>
@@ -263,22 +284,28 @@
         </div>
       </section>
       
-      <section data-bg="theo khi hau.png">
-        <div class="text-box">
+      <section data-bg="nen.png">
+        <div class="text-box-1">
           <h2>Thứ hai, bảo đảm sự quân bình âm dương trong cơ thể
             Người Việt sử dụng thức ăn như là các vị thuốc để trị bệnh</h2>
           <p>
            Theo quan niệm xưa, mọi bệnh tật sinh ra là do cơ thể bị mất quân bình âm dương, và thức ăn chính là vị thuốc tốt nhất giúp cơ thể khỏi bệnh. Vì vậy, nếu người 
            bệnh ốm do quá âm cần phải ăn đồ ăn dương (đau bụng lạnh, uống nước gừng); ngược lại nếu người bệnh ốm do quá dương thì cần phải ăn đồ ăn âm (bệnh kiết lị, ăn trứng gà rang với lá mơ)… 
           
-           Về mặt cơ thể, mỗi người có một thể trạng khác nhau: người nhiệt (dương) thường xuyên nóng trong, dễ nổi mụn, nên cần ăn các thực phẩm mát, lạnh (âm) như rau má, bí đao, nước dừa; người hàn (âm) hay lạnh 
+          <p></p>Về mặt cơ thể, mỗi người có một thể trạng khác nhau: người nhiệt (dương) thường xuyên nóng trong, dễ nổi mụn, nên cần ăn các thực phẩm mát, lạnh (âm) như rau má, bí đao, nước dừa; người hàn (âm) hay lạnh 
            tay chân, sợ lạnh, nên cần ăn nhiều thực phẩm ấm, nóng (dương) như gừng, tỏi, thịt dê. 
 
            Một món ăn ngon theo quan niệm Việt phải là món ăn “hợp” với người ăn, chứ không chỉ ngon theo một chuẩn vị tuyệt đối nào. 
-        </div>
-      </section>
-       <section data-bg="amthuctheomua_2.png">
-        <div class="text-box">
+           <br>
+            <img 
+            src="images/amthuctheomua_2.png" 
+          alt="Người Việt sử dụng thức ăn như là các vị thuốc để trị bệnh" 
+          style="display: block; width: 600px; height: auto; margin-top: 10px; border-radius: 20px;"
+
+          <figcaption style="font-size:13px; color:gray; margin-top:8px; text-align:left;" top: 50%; left: 50%>
+        Người Việt sử dụng thức ăn như là các vị thuốc để trị bệnh
+    </figcaption>
+</figure>
           <h2>Thứ ba, bảo đảm sự quân bình âm dương giữa con người và môi trường</h2>
           <p>
            Người Việt Nam có tập quán ăn uống theo vùng khí hậu và theo mùa: mùa hè nóng (thuộc Hỏa), cơ thể dễ bị nhiệt, người ta ăn rau muống luộc, canh chua, canh bí nấu tôm, nước rau má; mùa đông lạnh, cơ thể dễ nhiễm hàn, 
@@ -313,27 +340,26 @@
         <div class="text-box">
           <h2>Ẩm thực Việt - Trung: Đồng gốc triết lý, khác biệt món ngon</h2>
           <p>
-            Từ ngàn xưa, Việt Nam và Trung Quốc đã có mối quan hệ mật thiết về địa lý, văn hóa lẫn tư tưởng sống. Dù chung gốc rễ Nho giáo và triết học Phương Đông, mỗi nước lại có sự chuyển hóa Triết lý Âm dương và Thuyết Ngũ hành vào mâm cơm một cách rất riêng biệt.
+            Từ ngàn xưa, Việt Nam và Trung Quốc đã có mối quan hệ mật thiết về địa lý, văn hóa lẫn tư tưởng sống. Dù chung gốc rễ Nho giáo và triết học Phương Đông, mỗi nước lại có sự chuyển hóa Triết lý Âm dương và Thuyết Ngũ hành vào mâm cơm gia đình truyền thống một cách rất riêng biệt.
           </p>
-          <p>
+        </div>
+      </section>
+      <section data-bg="nen.png">
+       <div class="text-box-1">
+      <h2>Ẩm thực Việt - Trung: Đồng gốc triết lý, khác biệt món ngon</h2>
+      <p></p>
             Tục ngữ Trung Quốc có câu: “Khai môn thất kiện sự, thái mễ dầu diêm tương thố trà” (Mỗi ngày có bảy thứ phải lo, rau, gạo, dầu, muối, tương, dấm, trà). Có thể thấy, đối với người Trung, ẩm thực không còn là nhu cầu sinh tồn thuần túy mà đã trở thành đời sống tinh thần cũng như phản ánh cách họ nhìn nhận xã hội. 
           <p>
             Từ thời khai thiên lập quốc, người Trung đã vận dụng tư tưởng triết học “Âm dương” để giải thích hai mặt đối lập và hỗ tương trong tất cả 
             những hiện tượng của cuộc sống. Trong ẩm thực, họ chia thực phẩm thành hai loại là âm và dương để định vị chức năng sử dụng của chúng.
-          </p>
-        </div>
-      </section>
-     <section data-bg="image5.jpg">
-        <div class="text-box">
-          <h2>Ẩm thực Việt - Trung: Đồng gốc triết lý, khác biệt món ngon</h2>
-          <p>
+          <p></p>
             Chẳng hạn, chứng bệnh thuộc về “âm” như “thiếu máu” cần phải dùng thực phẩm thuộc “dương” để bổ sung, gồm có gan, trứng, đường nâu hoặc đỏ, táo tàu…có tác dụng tiêu hàn bổ khí. Ngược lại, chứng bệnh thuộc “dương” như huyết áp cao, viêm nhiễm, cần bổ sung thực phẩm có tính “âm” như dưa hấu, đậu xanh, hạt sen, dưa chuột… để giải độc, thanh nhiệt, hạ hỏa. 
-            Khác với Triết lý Âm dương, Thuyết Ngũ hành chính là nhận thức của họ về năm yếu tố cơ bản hình thành nên những quy luật trong vũ trụ. Trong ẩm thực, người Trung Quốc không chỉ đơn giản chia năm hương vị (ngũ vị) gồm ngọt, chua, cay, đắng, mặn), mà còn phân chia các loại thực phẩm, rau , thịt, củ, quả thành “ ngũ cốc”, “ ngũ nhục”, “ngũ thái” và “ngũ quả” cùng “ngũ khí” là mùi khai, mùi khét, mùi thơm, mùi tanh, mùi thối.
-          </p>
+            Khác với Triết lý Âm dương, Thuyết Ngũ hành chính là nhận thức của họ về năm yếu tố cơ bản hình thành nên những quy luật trong vũ trụ. 
+          <p></p>Trong ẩm thực, người Trung Quốc không chỉ đơn giản chia năm hương vị (ngũ vị) gồm ngọt, chua, cay, đắng, mặn), mà còn phân chia các loại thực phẩm, rau , thịt, củ, quả thành “ ngũ cốc”, “ ngũ nhục”, “ngũ thái” và “ngũ quả” cùng “ngũ khí” là mùi khai, mùi khét, mùi thơm, mùi tanh, mùi thối.
           </p>
         </div>
       </section>
-      <section data-bg="image5.jpg">
+      <section data-bg="image5.jpeg">
         <div class="text-box">
           <h2>Nhờ gốc rễ Âm dương và Ngũ hành vững chắc, các thầy thuốc đông y đã vận dụng hai khái niệm này để lý giải quan điểm chữa bệnh bằng ẩm thực của mình và để lại nhiều tiếng vang trong lịch sử y học cổ truyền Trung Hoa.</h2>
           <p>
@@ -391,6 +417,7 @@
     <!-- kết thúc #content -->
 
     <script>
+      
       // ================================================================
       // PHẦN NÀY TỰ ĐỘNG HOẠT ĐỘNG — không cần chỉnh sửa
       // ================================================================
